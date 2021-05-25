@@ -5,8 +5,8 @@ import { GoRepo, GoGist } from "react-icons/go";
 import { FiUsers, FiUserPlus } from "react-icons/fi";
 
 const UserInfo = () => {
-  const { githubUser, repos, followers } = React.useContext(GithubContext);
-  const { public_repos, following, public_gists } = githubUser;
+  const { githubUser} = React.useContext(GithubContext);
+  const { public_repos, followers, following, public_gists } = githubUser;
 
   const items = [
     {
@@ -17,7 +17,7 @@ const UserInfo = () => {
       color: "pink",
     },
     {
-      id: 1,
+      id: 2,
       icon: <FiUsers className="icon" />,
       label: "followers",
       value: followers,
@@ -40,10 +40,24 @@ const UserInfo = () => {
   ];
   return (
     <section className="section">
-      <Wrapper className="section-center">{items.map((item) => {
-        return(<p>item</p>)
-      })}</Wrapper>
+      <Wrapper className="section-center">
+        {items.map((item) => {
+          return <Item key={item.id} {...item}></Item>;
+        })}
+      </Wrapper>
     </section>
+  );
+};
+
+const Item = ({ icon, label, value, color }) => {
+  return (
+    <article className="item">
+      <span className={color}>{icon}</span>
+      <div>
+        <h3>{value}</h3>
+        <p>{label}</p>
+      </div>
+    </article>
   );
 };
 
